@@ -49,3 +49,20 @@ data "vault_generic_secret" "proxmox" {
   path = "kv/proxmox"
 }
 
+provider "proxmox" {
+  endpoint = data.vault_generic_secret.proxmox.data["endpoint"]
+  # or remove the line, and use PROXMOX_VE_USERNAME environment variable
+  username = data.vault_generic_secret.proxmox.data["user"]
+  # or remove the line, and use PROXMOX_VE_PASSWORD environment variable
+  password = data.vault_generic_secret.proxmox.data["password"]
+  # because self-signed TLS certificate is in use
+  insecure = false
+  # uncomment (unless on Windows...)
+  # tmp_dir  = "/var/tmp"
+
+  ssh {
+    agent = true
+    # TODO: uncomment and configure if using api_token instead of password
+    # username = "root"
+  }
+}
