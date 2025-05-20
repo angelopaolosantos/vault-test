@@ -46,7 +46,7 @@ provider "vault" {
 }
 
 data "vault_generic_secret" "proxmox" {
-  path = "kv/proxmox"
+  path = "homelab_kv/proxmox"
 }
 
 provider "proxmox" {
