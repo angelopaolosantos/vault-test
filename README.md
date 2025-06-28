@@ -12,6 +12,10 @@
 
 ## In Terminal
 
+You need to install vault before doing these steps.
+https://developer.hashicorp.com/vault/install
+
+
 1. Set VAULT_ADDR environment variable 
 `export VAULT_ADDR='https://vault.deviantlab.duckdns.org'`
 
