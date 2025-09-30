@@ -27,13 +27,6 @@ provider "ansible" {
   # Configuration options
 }
 
-variable login_username {
-  type = string
-}
-variable login_password {
-  type = string
-}
-
 provider "vault" {
   auth_login {
     path = "auth/userpass/login/${var.login_username}"
@@ -42,11 +35,11 @@ provider "vault" {
       password = var.login_password
     }
   }
-  address = "https://vault.deviantlab.duckdns.org/"
+  address = var.vault_address
 }
 
 data "vault_generic_secret" "proxmox" {
-  path = "homelab_kv/proxmox"
+  path = var.vault_path
 }
 
 provider "proxmox" {
